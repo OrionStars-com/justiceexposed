@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/OrionStars-com/justiceexposed/evidence-ledger/public-manifest.schema.json",
+  "title": "The Public Record — Public Integrity Manifest",
+  "type": "object",
+  "required": ["manifestVersion", "scope", "archive", "generatedAt", "evidenceCount", "items"],
+  "properties": {
+    "manifestVersion": { "const": 1 },
+    "scope": { "const": "public-integrity-manifest" },
+    "archive": { "const": "The Public Record" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "evidenceCount": { "type": "integer", "minimum": 0 },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["exhibitId", "title", "category", "sourceName", "verificationStatus", "privacyStatus", "publicSha256", "publishedAt"],
+        "properties": {
+          "exhibitId": { "type": "string", "pattern": "^EVD-[0-9]{4}-[A-F0-9]{8}$" },
+          "title": { "type": "string", "minLength": 1 },
+          "description": { "type": "string" },
+          "category": { "type": "string" },
+          "documentDate": { "type": ["string", "null"] },
+          "sourceName": { "type": "string", "minLength": 1 },
+          "sourceType": { "type": "string" },
+          "caseReference": { "type": "string" },
+          "certificationStatus": { "type": "string" },
+          "verificationStatus": { "type": "string" },
+          "privacyStatus": { "enum": ["public", "redacted"] },
+          "relevance": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "publicFilename": { "type": "string" },
+          "publicSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "publicMimeType": { "type": "string" },
+          "publicSizeBytes": { "type": "integer", "minimum": 1 },
+          "publishedAt": { "type": "string", "format": "date-time" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "publicFileVersions": { "type": "array" },
+    "publicationEvents": { "type": "array" }
+  },
+  "additionalProperties": false
+}
